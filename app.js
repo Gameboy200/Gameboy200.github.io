@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('https://api.frankfurter.app/currencies')
         .then(response => response.json())
         .then(data => {
+            console.log('Currencies fetched:', data); // Debug statement
             const baseCurrencySelect = document.getElementById('baseCurrency');
             const targetCurrencySelect = document.getElementById('targetCurrency');
             
@@ -24,6 +25,7 @@ function convertCurrency() {
     fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${baseCurrency}&to=${targetCurrency}`)
         .then(response => response.json())
         .then(data => {
+            console.log('Conversion data:', data); // Debug statement
             if (data.rates && data.rates[targetCurrency]) {
                 const rate = data.rates[targetCurrency];
                 const convertedAmount = amount * rate;
@@ -41,4 +43,3 @@ function convertCurrency() {
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
 }
-
