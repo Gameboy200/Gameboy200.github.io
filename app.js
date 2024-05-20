@@ -1,11 +1,27 @@
-// In app.js
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('https://api.frankfurter.app/currencies')
+        .then(response => response.json())
+        .then(data => {
+            const baseCurrencySelect = document.getElementById('baseCurrency');
+            const targetCurrencySelect = document.getElementById('targetCurrency');
+            
+            for (const [currencyCode, currencyName] of Object.entries(data)) {
+                const option = document.createElement('option');
+                option.value = currencyCode;
+                option.text = `${currencyName} (${currencyCode})`;
+                baseCurrencySelect.appendChild(option.cloneNode(true));
+                targetCurrencySelect.appendChild(option);
+            }
+        })
+        .catch(error => console.error('Error fetching currencies:', error));
+});
 
 function convertCurrency() {
     const amount = document.getElementById('amount').value;
-    const baseCurrency = document.getElementById('baseCurrency').value.toUpperCase();
-    const targetCurrency = document.getElementById('targetCurrency').value.toUpperCase();
+    const baseCurrency = document.getElementById('baseCurrency').value;
+    const targetCurrency = document.getElementById('targetCurrency').value;
 
-    fetch(`https://api.frankfurter.app/latest?from=${baseCurrency}&to=${targetCurrency}`)
+    fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${baseCurrency}&to=${targetCurrency}`)
         .then(response => response.json())
         .then(data => {
             if (data.rates && data.rates[targetCurrency]) {
@@ -22,15 +38,7 @@ function convertCurrency() {
         });
 }
 
-// Register service worker
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js')
-            .then(registration => {
-                console.log('Service Worker registered with scope:', registration.scope);
-            })
-            .catch(error => {
-                console.error('Service Worker registration failed:', error);
-            });
-    });
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
 }
+
