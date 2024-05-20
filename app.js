@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Fetch available currencies from the API
     fetch('https://api.frankfurter.app/currencies')
         .then(response => response.json())
         .then(data => {
@@ -42,4 +43,17 @@ function convertCurrency() {
 
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
+}
+
+// Register the service worker if supported
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch(error => {
+                console.error('Service Worker registration failed:', error);
+            });
+    });
 }
