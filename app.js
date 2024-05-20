@@ -12,7 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 option.value = currencyCode;
                 option.text = `${currencyName} (${currencyCode})`;
                 baseCurrencySelect.appendChild(option.cloneNode(true));
-                targetCurrencySelect.appendChild(option);
+
+                const targetOption = option.cloneNode(true);
+                if (currencyCode === 'EUR') {
+                    targetOption.selected = true;
+                }
+                targetCurrencySelect.appendChild(targetOption);
             }
         })
         .catch(error => console.error('Error fetching currencies:', error));
@@ -36,7 +41,7 @@ function convertCurrency() {
             console.log('Conversion data:', data); // Debug statement
             if (data.rates && data.rates[targetCurrency]) {
                 const convertedAmount = data.rates[targetCurrency];
-                document.getElementById('result').innerText = `${amount} ${baseCurrency} is equal to ${convertedAmount} `;
+                document.getElementById('result').innerText = `${amount} ${baseCurrency} is equal to ${convertedAmount} ${targetCurrency}`;
             } else {
                 document.getElementById('result').innerText = 'Conversion failed';
             }
