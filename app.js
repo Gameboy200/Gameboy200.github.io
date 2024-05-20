@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (currencyCode === 'EUR') {
                     targetOption.selected = true;
                 }
-                targetCurrencySelect.appendChild(targetOption);
+                baseCurrencySelect.appendChild(targetOption);
             }
         })
         .catch(error => console.error('Error fetching currencies:', error));
