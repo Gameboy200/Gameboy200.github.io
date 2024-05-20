@@ -36,7 +36,7 @@ function convertCurrency() {
             console.log('Conversion data:', data); // Debug statement
             if (data.rates && data.rates[targetCurrency]) {
                 const convertedAmount = data.rates[targetCurrency];
-                document.getElementById('result').innerText = `${amount} ${baseCurrency} is equal to ${convertedAmount} ${targetCurrency}`;
+                document.getElementById('result').innerText = `${amount} ${baseCurrency} is equal to ${convertedAmount} `;
             } else {
                 document.getElementById('result').innerText = 'Conversion failed';
             }
