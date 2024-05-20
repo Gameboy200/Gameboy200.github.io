@@ -1,23 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const baseCurrencySelect = document.getElementById('baseCurrency');
+    const targetCurrencySelect = document.getElementById('targetCurrency');
+
     // Fetch available currencies from the API
     fetch('https://api.frankfurter.app/currencies')
         .then(response => response.json())
         .then(data => {
             console.log('Currencies fetched:', data); // Debug statement
-            const baseCurrencySelect = document.getElementById('baseCurrency');
-            const targetCurrencySelect = document.getElementById('targetCurrency');
-            
             for (const [currencyCode, currencyName] of Object.entries(data)) {
                 const option = document.createElement('option');
                 option.value = currencyCode;
                 option.text = `${currencyName} (${currencyCode})`;
                 baseCurrencySelect.appendChild(option.cloneNode(true));
-
-                const targetOption = option.cloneNode(true);
-                if (currencyCode === 'EUR') {
-                    targetOption.selected = true;
-                }
-                baseCurrencySelect.appendChild(targetOption);
+                targetCurrencySelect.appendChild(option);
             }
         })
         .catch(error => console.error('Error fetching currencies:', error));
@@ -54,17 +49,4 @@ function convertCurrency() {
 
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
-}
-
-// Register the service worker if supported
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-            .then(registration => {
-                console.log('Service Worker registered with scope:', registration.scope);
-            })
-            .catch(error => {
-                console.error('Service Worker registration failed:', error);
-            });
-    });
 }
