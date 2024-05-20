@@ -10,13 +10,15 @@
     <div class="container">
         <h1>Currency Converter</h1>
         <div>
-            <input type="text" id="amount" placeholder="Enter amount">
-            <input type="text" id="baseCurrency" placeholder="Enter base currency (e.g., EUR)">
-            <input type="text" id="targetCurrency" placeholder="Enter target currency (e.g., USD)">
+            <input type="number" id="amount" placeholder="Enter amount">
+            <select id="baseCurrency"></select>
+            <select id="targetCurrency"></select>
             <button onclick="convertCurrency()">Convert</button>
         </div>
         <p id="result">Result will be shown here</p>
+        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
