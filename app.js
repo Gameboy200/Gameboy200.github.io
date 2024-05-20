@@ -23,13 +23,19 @@ function convertCurrency() {
     const baseCurrency = document.getElementById('baseCurrency').value;
     const targetCurrency = document.getElementById('targetCurrency').value;
 
+    // Make sure the amount is a positive number
+    if (amount <= 0 || isNaN(amount)) {
+        document.getElementById('result').innerText = 'Please enter a valid amount';
+        return;
+    }
+
+    // Fetch the conversion rate from the API
     fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${baseCurrency}&to=${targetCurrency}`)
         .then(response => response.json())
         .then(data => {
             console.log('Conversion data:', data); // Debug statement
             if (data.rates && data.rates[targetCurrency]) {
-                const rate = data.rates[targetCurrency];
-                const convertedAmount = amount * rate;
+                const convertedAmount = data.rates[targetCurrency];
                 document.getElementById('result').innerText = `${amount} ${baseCurrency} is equal to ${convertedAmount} ${targetCurrency}`;
             } else {
                 document.getElementById('result').innerText = 'Conversion failed';
