@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="#f0f6fc">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+    <div class="container">
+        <h1>Currency Converter</h1>
+        <div>
+            <input type="number" id="amount" placeholder="Enter amount">
+            <select id="baseCurrency"></select>
+            <select id="targetCurrency"></select>
+            <button onclick="convertCurrency()">Convert</button>
+        </div>
+        <p id="result">Result will be shown here</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
