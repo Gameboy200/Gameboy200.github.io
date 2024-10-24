@@ -25,7 +25,8 @@ async function getVideoTitle(videoId, apiKey) {
 async function downloadMedia(videoQuality = "1080", audioFormat = "mp3", downloadMode = "auto") {
     var inputText = 'https://www.youtube.com/watch/' + vidid
 	var urrl = inputText
-    const apiUrl = "https://api.cobalt.tools/api/json";
+    //const apiUrl = "https://api.cobalt.tools/api/json";
+	const apiUrl = "https://cobalt-7.kwiatekmiki.com/api/json";
 	if (vidid == ''){
 		alert('No URL found')
 		return
