@@ -1,4 +1,5 @@
 let vidid = ''
+let mode = false
 
 async function getVideoTitle(videoId, apiKey) {
     const url = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${apiKey}&part=snippet`;
@@ -22,7 +23,18 @@ async function getVideoTitle(videoId, apiKey) {
     }
 }
 
-async function downloadMedia(videoQuality = "1080", audioFormat = "mp3", downloadMode = "auto") {
+function handleSelection() {
+            const selectElement = document.getElementById('options');
+            const selectedOption = selectElement.value;
+            console.log(`You selected: ${selectedOption}`)
+			if (selectedOption === 'Video') {
+				mode = false
+            } else if (selectedOption === 'Audio'){
+				mode = true
+			}
+		}
+
+async function downloadMedia(videoQuality = "1080", audioFormat = "mp3", downloadMode = mode) {
     var inputText = 'https://www.youtube.com/watch/' + vidid
 	var urrl = inputText
     //const apiUrl = "https://api.cobalt.tools/api/json";
@@ -44,7 +56,7 @@ async function downloadMedia(videoQuality = "1080", audioFormat = "mp3", downloa
         url: urrl,
         vQuality: videoQuality,
         aFormat: audioFormat,
-        downloadMode: downloadMode,
+        isAudioOnly: downloadMode,
         filenamePattern: "basic"
     };
 
