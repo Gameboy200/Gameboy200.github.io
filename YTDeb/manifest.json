@@ -3,12 +3,12 @@
   "short_name": "Downloader",
   "icons": [
     {
-      "src": "logos/YTDiOS192x192.png",
+      "src": "logos/YTDiOS 192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "logos/YTDiOS512x512.png",
+      "src": "logos/YTDiOS 512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
